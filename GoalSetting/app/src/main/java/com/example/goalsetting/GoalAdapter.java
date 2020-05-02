@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,17 +51,19 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.MovieVH> {
 
         ConstraintLayout expandableLayout;
         TextView titleTextView, currentValueTextView;
+        LinearLayout ll;
 
         public MovieVH(@NonNull final View itemView) {
             super(itemView);
 
+            ll = itemView.findViewById(R.id.linearTitle);
             titleTextView = itemView.findViewById(R.id.textTitle);
             currentValueTextView = itemView.findViewById(R.id.textCurrentValue);
 
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
 
 
-            titleTextView.setOnClickListener(new View.OnClickListener() {
+            ll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
