@@ -67,9 +67,13 @@ class HomeFragment : Fragment() {
 
         goalList = goals;
         val fitnessCategory: Category = object  : Category( "Fitness", goals){}
+        val dietCategory2: Category = object  : Category( "Diet", goals2){}
+        val dietCategory3: Category = object  : Category( "Diet", goals2){}
+        val dietCategory4: Category = object  : Category( "Diet", goals2){}
+        val dietCategory5: Category = object  : Category( "Diet", goals2){}
         val dietCategory: Category = object  : Category( "Diet", goals2){}
 
-        categoryList = listOf(fitnessCategory, dietCategory)
+        categoryList = listOf(fitnessCategory, dietCategory, dietCategory2, dietCategory3,dietCategory4,dietCategory5,dietCategory5,dietCategory5,dietCategory5,dietCategory5,dietCategory5,dietCategory5)
         Log.d("log", "added data")
     }
 
