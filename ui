@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="1">
+                    
+                    <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="0dp"
+                    app:cardBackgroundColor="@color/colorTwo"
+                    app:cardCornerRadius="0dp"
+                    android:elevation="6dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="0dp"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="0dp">
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="0dp"
+                            android:padding="0dp"
+                            android:columnCount="1"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Fitness"
+                                android:textColor="@color/cardview_light_background"
+                                android:padding="0dp"
+                                android:textSize="@dimen/header_size"
+                                android:height="@dimen/goal_heading_size"></TextView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_rowWeight="1"
+                                android:layout_columnWeight="1"
+                                android:elevation="6dp"
+                                app:cardBackgroundColor="@color/cardview_light_background"
+                                app:cardCornerRadius="0dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="0dp"
+                                    android:orientation="vertical"
+                                    android:padding="0dp">
+
+                                    <GridLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:columnCount="1">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/item1"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="@dimen/goal_size"
+                                            android:layout_rowWeight="1"
+                                            android:layout_columnWeight="1"
+                                            android:layout_margin="0dp"
+                                            android:elevation="6dp"
+                                            app:cardCornerRadius="6dp"
+                                            android:clickable="true">
+                                            <!-- Child Layout -->
+                                            <androidx.constraintlayout.widget.ConstraintLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="0dp"
+                                                android:background="?attr/selectableItemBackground"
+                                                android:orientation="vertical">
+
+                                            <LinearLayout
+                                               android:layout_width="match_parent"
+                                               android:layout_height="match_parent"
+                                                android:orientation="vertical"
+                                                >
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:padding="8dp"
+                                                android:text="Run a 20 minute 5K"
+                                                android:textSize="@dimen/text_size"></TextView>
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:padding="8dp"
+                                                android:text="Currently at: 21.5"
+                                                android:textSize="@dimen/current_value_size"></TextView>
+                                            </LinearLayout>
+                                            </androidx.constraintlayout.widget.ConstraintLayout>
+                                        </androidx.cardview.widget.CardView>
+
+                                        <androidx.cardview.widget.CardView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_rowWeight="1"
+                                            android:layout_columnWeight="1"
+                                            android:layout_margin="0dp"
+                                            android:elevation="6dp"
+                                            app:cardCornerRadius="6dp"
+                                            android:clickable="true">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:orientation="vertical"
+                                                >
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:padding="8dp"
+                                                    android:text="Complete 50 pushups"
+                                                    android:textSize="@dimen/text_size"></TextView>
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:padding="8dp"
+                                                    android:text="Currently at: 35"
+                                                    android:textSize="@dimen/current_value_size"></TextView>
+                                            </LinearLayout>
+
+
+                                        </androidx.cardview.widget.CardView>
+
+                                        <androidx.cardview.widget.CardView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_rowWeight="1"
+                                            android:layout_columnWeight="1"
+                                            android:layout_margin="0dp"
+                                            android:elevation="6dp"
+                                            app:cardCornerRadius="6dp"
+                                            android:clickable="true">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:orientation="vertical"
+                                                >
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:padding="8dp"
+                                                    android:text="Squat 100KG"
+                                                    android:textSize="@dimen/text_size"></TextView>
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:padding="8dp"
+                                                    android:text="Currently at: 82"
+                                                    android:textSize="@dimen/current_value_size"></TextView>
+                                            </LinearLayout>
+
+
+                                        </androidx.cardview.widget.CardView>
+
+                                    </GridLayout>
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                        </GridLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                </GridLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
