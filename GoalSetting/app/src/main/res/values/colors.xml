@@ -8,5 +8,6 @@
     <color name="colorThree">#E9C46A</color>
     <color name="colorFour">#F4A261</color>
     <color name="colorFive">#E76F51</color>
+    <color name="categoryTitle">#FFFFFF</color>
 
 </resources>

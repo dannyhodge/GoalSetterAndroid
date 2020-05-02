@@ -12,4 +12,20 @@ public class Category {
         this.goals = goals;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Goal> getGoals() {
+        return goals;
+    }
+
+    public void setStartValue(List<Goal> goals) {
+        this.goals = goals;
+    }
+
 }

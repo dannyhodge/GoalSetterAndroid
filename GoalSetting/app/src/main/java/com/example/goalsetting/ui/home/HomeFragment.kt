@@ -11,10 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.goalsetting.Category
-import com.example.goalsetting.Goal
-import com.example.goalsetting.GoalAdapter
-import com.example.goalsetting.R
+import com.example.goalsetting.*
+import kotlinx.android.synthetic.main.category_row.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -22,9 +20,13 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-    private var  recyclerViewVar: RecyclerView? = null
+    private var recyclerViewVar: RecyclerView? = null
+    private var categoryRecyclerViewVar: RecyclerView? = null
     private var goalList: List<Goal>? = null
+    private var categoryList: List<Category>? = null
     private lateinit var adapter: GoalAdapter
+    private lateinit var categoryAdapter: CategoryAdapter
+    private var categoryId = 0
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
@@ -37,8 +39,15 @@ class HomeFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerViewVar = view.recyclerView
+
         initData()
-        initRecyclerView()
+        //first, init category recyclerview. just show titles
+
+        initCategoryRecyclerView()
+        //then, init goals, and put them into their category
+      //  categoryRecyclerViewVar = view.recyclerViewCategory
+     //   initRecyclerView()
+
         return view
     }
 
@@ -51,19 +60,23 @@ class HomeFragment : Fragment() {
             Goal("Bench Press 300KG", 100.0, 300.0, 120.0 )
         )
 
-        goalList = goals;
-        val category: Category = object  : Category( "Fitness", goals){}
+        val goals2 = listOf(
+            Goal("Cook 3 new meals", 0.0, 3.0, 1.0 ),
+            Goal("Lose 30 pounds", 0.0, 30.0, 25.0 )
+        )
 
+        goalList = goals;
+        val fitnessCategory: Category = object  : Category( "Fitness", goals){}
+        val dietCategory: Category = object  : Category( "Diet", goals2){}
+
+        categoryList = listOf(fitnessCategory, dietCategory)
         Log.d("log", "added data")
     }
 
-    private fun initRecyclerView() {
-        val goalAdapter = object : GoalAdapter(goalList) {}
-
+    private fun initCategoryRecyclerView() {
         recyclerViewVar?.layoutManager = LinearLayoutManager(activity)
-        adapter = GoalAdapter(goalList)
-        recyclerViewVar?.adapter = adapter
+        categoryAdapter = CategoryAdapter(categoryList)
+        recyclerViewVar?.adapter = categoryAdapter
     }
-
 
 }

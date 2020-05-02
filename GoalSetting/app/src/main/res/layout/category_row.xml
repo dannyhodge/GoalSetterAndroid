@@ -5,75 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="0dp"
+    android:id="@+id/tempid">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp"
+        app:cardBackgroundColor="@color/colorTwo">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/categoryTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground">
+            android:padding="8dp"
+            android:text="Fitness"
+            android:textSize="@dimen/header_size"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textColor="@color/categoryTitle"/>
 
-            <LinearLayout
-                android:id="@+id/linearTitle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Run a 20 minute 5K"
-                    android:textSize="@dimen/text_size"/>
-
-                <TextView
-                    android:id="@+id/textCurrentValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Currently at: 21.5"
-                    android:textSize="@dimen/current_value_size"/>
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/expandableLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linearTitle">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tempInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Run a 20 minute 5K"
-                        android:textSize="@dimen/current_value_size" />
-
-                    <TextView
-                        android:id="@+id/otherTemp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Currently at: 21.5"
-                        android:textSize="@dimen/current_value_size"/>
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 
 </LinearLayout>
