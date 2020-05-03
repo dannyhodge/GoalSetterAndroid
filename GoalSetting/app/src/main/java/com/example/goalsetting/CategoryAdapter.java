@@ -47,7 +47,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         if(deciX == 0.25) {
             holder.titleCard.setCardBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.colorTwo));
         }
-        else  if(deciX == 0.5) {
+        else if(deciX == 0.5) {
             holder.titleCard.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorThree));
         }
         if(deciX == 0.75) {

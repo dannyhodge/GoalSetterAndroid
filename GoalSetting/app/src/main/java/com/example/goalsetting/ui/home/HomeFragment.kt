@@ -12,8 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goalsetting.*
-import kotlinx.android.synthetic.main.category_row.view.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
@@ -21,12 +19,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var recyclerViewVar: RecyclerView? = null
-    private var categoryRecyclerViewVar: RecyclerView? = null
     private var goalList: List<Goal>? = null
     private var categoryList: List<Category>? = null
-    private lateinit var adapter: GoalAdapter
     private lateinit var categoryAdapter: CategoryAdapter
-    private var categoryId = 0
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
@@ -41,13 +36,7 @@ class HomeFragment : Fragment() {
         recyclerViewVar = view.recyclerView
 
         initData()
-        //first, init category recyclerview. just show titles
-
         initCategoryRecyclerView()
-        //then, init goals, and put them into their category
-      //  categoryRecyclerViewVar = view.recyclerViewCategory
-     //   initRecyclerView()
-
         return view
     }
 
@@ -67,13 +56,9 @@ class HomeFragment : Fragment() {
 
         goalList = goals;
         val fitnessCategory: Category = object  : Category( "Fitness", goals){}
-        val dietCategory2: Category = object  : Category( "Diet", goals2){}
-        val dietCategory3: Category = object  : Category( "Diet", goals2){}
-        val dietCategory4: Category = object  : Category( "Diet", goals2){}
-        val dietCategory5: Category = object  : Category( "Diet", goals2){}
         val dietCategory: Category = object  : Category( "Diet", goals2){}
 
-        categoryList = listOf(fitnessCategory, dietCategory, dietCategory2, dietCategory3,dietCategory4,dietCategory5,dietCategory5,dietCategory5,dietCategory5,dietCategory5,dietCategory5,dietCategory5)
+        categoryList = listOf(fitnessCategory, dietCategory, dietCategory, dietCategory, dietCategory)
         Log.d("log", "added data")
     }
 
