@@ -36,7 +36,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
 
         Goal goal = goalList.get(position);
         holder.titleTextView.setText(goal.getTitle());
-        holder.currentValueTextView.setText("Progress: " + goal.getProgress());
+      //  holder.currentValueTextView.setText("Progress: " + goal.getProgress());
 
         boolean isExpanded = goalList.get(position).isExpanded();
         holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
@@ -52,7 +52,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
         private static final String TAG = "GoalVH";
 
         ConstraintLayout expandableLayout;
-        TextView titleTextView, currentValueTextView;
+        TextView titleTextView;
         LinearLayout ll;
 
         public GoalVH(@NonNull final View itemView) {
@@ -60,7 +60,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
 
             ll = itemView.findViewById(R.id.linearTitle);
             titleTextView = itemView.findViewById(R.id.textTitle);
-            currentValueTextView = itemView.findViewById(R.id.textCurrentValue);
+            //currentValueTextView = itemView.findViewById(R.id.textCurrentValue);
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
 
             ll.setOnClickListener(new View.OnClickListener() {
