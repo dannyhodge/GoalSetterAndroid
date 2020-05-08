@@ -1,6 +1,7 @@
 package com.example.goalsetting;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.goalsetting.ui.home.HomeFragment;
+
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryVH> {
@@ -20,9 +23,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private List<Category> categoryList;
     private int currentId = 0;
     private GoalAdapter adapter;
+    private HomeFragment fragment;
 
-    public CategoryAdapter(List<Category> categoryList) {
+    public CategoryAdapter(List<Category> categoryList, HomeFragment fragment) {
         this.categoryList = categoryList;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -36,6 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryVH holder, int position) {
         Category category = categoryList.get(position);
+        Log.d("Log", "category changed");
         holder.categoryTitle.setText(category.getTitle());
         int y = holder.itemView.getContext().getResources().getIdentifier(String.valueOf(R.id.tempid), null, null);
         if (holder.categoryLL.getId() == y) {
@@ -58,7 +64,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
 
         holder.recyclerViewCategory.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext()));
-        adapter = new GoalAdapter(category.getGoals());
+        adapter = new GoalAdapter(category.getGoals(), categoryList, fragment);
         holder.recyclerViewCategory.setAdapter(adapter);
     }
 

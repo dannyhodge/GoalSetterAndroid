@@ -16,15 +16,23 @@ import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.goalsetting.ui.home.HomeFragment;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
 
     private static final String TAG = "GoalAdapter";
     List<Goal> goalList;
+    List<Category> categoryList;
+    List<Goal> allGoals = new ArrayList<>();
+    private HomeFragment fragment;
 
-    public GoalAdapter(List<Goal> goalList) {
+    public GoalAdapter(List<Goal> goalList, List<Category> categoryList, HomeFragment fragment) {
         this.goalList = goalList;
+        this.categoryList = this.categoryList;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -51,8 +59,19 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
             holder.progressBar.setMax((int) goal.getEndValue() - (int) goal.getStartValue());
             holder.progressBar.setProgress((int) goal.getProgress() - (int) goal.getStartValue());
         }
-        boolean isExpanded = goalList.get(position).isExpanded();
-        holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
+        boolean isExpanded = goal.isExpanded();
+
+        if(isExpanded) {
+            holder.expandableLayout.setVisibility(View.VISIBLE);
+            holder.expandableLayout.setMaxHeight(150);
+        }
+        else {
+            holder.expandableLayout.setVisibility(View.INVISIBLE);
+            holder.expandableLayout.setMaxHeight(0);
+        }
+      //  holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
     }
 
     @Override
@@ -80,10 +99,15 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
             progressText = itemView.findViewById(R.id.textProgress);
 
             ll.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onClick(View view) {
-                    Goal goal = goalList.get(getAdapterPosition());
-                    goal.setExpanded(!goal.isExpanded());
+
+                    Goal goal1 = goalList.get(getAdapterPosition());
+
+                    fragment.closeAllExpandables(goal1.getId());
+
+                    goal1.setExpanded(!goal1.isExpanded());
                     notifyItemChanged(getAdapterPosition());
                     hideKeyboard((Activity) view.getContext());
                 }

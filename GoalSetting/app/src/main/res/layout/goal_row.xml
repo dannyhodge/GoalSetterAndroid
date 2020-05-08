@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:padding="10dp"
-                        android:textSize="14dp" />
+                        android:textSize="@dimen/current_value_size" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

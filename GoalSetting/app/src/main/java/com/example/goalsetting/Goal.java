@@ -2,18 +2,20 @@ package com.example.goalsetting;
 
 public class Goal {
 
+   private int id;
    private String title;
    private double startValue;
    private double endValue;
    private double progress;
    private boolean expanded;
 
-   public Goal(String title, double startValue, double endValue, double progress) {
+   public Goal(String title, double startValue, double endValue, double progress, int id) {
        this.title = title;
        this.startValue = startValue;
        this.endValue = endValue;
        this.progress = progress;
        this.expanded = false;
+       this.id = id;
    }
 
     public String getTitle() {
@@ -54,5 +56,9 @@ public class Goal {
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
+    }
+
+    public int getId() {
+        return id;
     }
 }
