@@ -42,11 +42,11 @@ class HomeFragment : Fragment() {
 
     fun initData() {
         val goals = listOf(
-            Goal("Run a 20 minute 5K", 25.0, 20.0, 25.0 ),
-            Goal("Do 50 pushups", 30.0, 50.0, 35.0 ),
+            Goal("Run a 20 minute 5K", 25.0, 20.0, 24.0 ),
+            Goal("Do 50 pushups", 30.0, 50.0, 45.0 ),
             Goal("Squat 100KG", 40.0, 100.0, 60.0 ),
             Goal("Deadlift 200KG", 70.0, 200.0, 80.0 ),
-            Goal("Bench Press 300KG", 100.0, 300.0, 120.0 )
+            Goal("Bench Press 300KG", 100.0, 300.0, 270.0 )
         )
 
         val goals2 = listOf(

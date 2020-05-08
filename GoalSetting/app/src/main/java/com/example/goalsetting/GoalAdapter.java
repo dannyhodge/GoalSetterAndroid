@@ -1,15 +1,18 @@
 package com.example.goalsetting;
 
 import android.app.Activity;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,13 +34,23 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
         return new GoalVH(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull GoalVH holder, int position) {
 
         Goal goal = goalList.get(position);
         holder.titleTextView.setText(goal.getTitle());
-      //  holder.currentValueTextView.setText("Progress: " + goal.getProgress());
+        holder.currentValueTextView.setText("" + (int)goal.getEndValue());
+        holder.progressText.setText("" + (int)goal.getStartValue());
 
+        if(goal.getStartValue() > goal.getEndValue()) {
+            holder.progressBar.setMax((int) goal.getStartValue() - (int) goal.getEndValue());
+            holder.progressBar.setProgress((int) goal.getStartValue() - (int) goal.getProgress());
+        }
+        else {
+            holder.progressBar.setMax((int) goal.getEndValue() - (int) goal.getStartValue());
+            holder.progressBar.setProgress((int) goal.getProgress() - (int) goal.getStartValue());
+        }
         boolean isExpanded = goalList.get(position).isExpanded();
         holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
     }
@@ -52,34 +65,33 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
         private static final String TAG = "GoalVH";
 
         ConstraintLayout expandableLayout;
-        TextView titleTextView;
+        TextView titleTextView, currentValueTextView, progressText;
         LinearLayout ll;
+        ProgressBar progressBar;
 
         public GoalVH(@NonNull final View itemView) {
             super(itemView);
 
             ll = itemView.findViewById(R.id.linearTitle);
             titleTextView = itemView.findViewById(R.id.textTitle);
-            //currentValueTextView = itemView.findViewById(R.id.textCurrentValue);
+            currentValueTextView = itemView.findViewById(R.id.textCurrentValue);
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
+            progressBar = itemView.findViewById(R.id.progressBar);
+            progressText = itemView.findViewById(R.id.textProgress);
 
             ll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     Goal goal = goalList.get(getAdapterPosition());
                     goal.setExpanded(!goal.isExpanded());
                     notifyItemChanged(getAdapterPosition());
                     hideKeyboard((Activity) view.getContext());
-
                 }
             });
         }
         public void hideKeyboard(Activity activity) {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-            //Find the currently focused view, so we can grab the correct window token from it.
             View view = activity.getCurrentFocus();
-            //If no view currently has focus, create a new one, just so we can grab a window token from it
             if (view == null) {
                 view = new View(activity);
             }
