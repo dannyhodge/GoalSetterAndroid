@@ -1,12 +1,14 @@
 package com.example.goalsetting;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goalsetting.ui.home.HomeFragment;
@@ -28,11 +32,13 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
     List<Category> categoryList;
     List<Goal> allGoals = new ArrayList<>();
     private HomeFragment fragment;
+    AppDatabase db;
 
-    public GoalAdapter(List<Goal> goalList, List<Category> categoryList, HomeFragment fragment) {
+    public GoalAdapter(List<Goal> goalList, List<Category> categoryList, HomeFragment fragment, AppDatabase db) {
         this.goalList = goalList;
         this.categoryList = this.categoryList;
         this.fragment = fragment;
+        this.db = db;
     }
 
     @NonNull
@@ -64,13 +70,12 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
 
         if(isExpanded) {
             holder.expandableLayout.setVisibility(View.VISIBLE);
-            holder.expandableLayout.setMaxHeight(150);
+            holder.expandableLayout.setMaxHeight(250);
         }
         else {
             holder.expandableLayout.setVisibility(View.INVISIBLE);
             holder.expandableLayout.setMaxHeight(0);
         }
-      //  holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
     }
 
@@ -87,6 +92,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
         TextView titleTextView, currentValueTextView, progressText;
         LinearLayout ll;
         ProgressBar progressBar;
+        Button removeButton;
 
         public GoalVH(@NonNull final View itemView) {
             super(itemView);
@@ -97,19 +103,30 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
             progressBar = itemView.findViewById(R.id.progressBar);
             progressText = itemView.findViewById(R.id.textProgress);
+            removeButton = itemView.findViewById(R.id.removegoalbutton);
 
             ll.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onClick(View view) {
-
                     Goal goal1 = goalList.get(getAdapterPosition());
-
                     fragment.closeAllExpandables(goal1.getId());
-
                     goal1.setExpanded(!goal1.isExpanded());
                     notifyItemChanged(getAdapterPosition());
                     hideKeyboard((Activity) view.getContext());
+                }
+            });
+
+            removeButton.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onClick(View view) {
+                    Goal goal1 = goalList.get(getAdapterPosition());
+                    GoalDB goalToDelete = db.goalDao().findByName(goal1.getTitle());
+                    db.goalDao().delete(goalToDelete);
+                    goalList.remove(goalList.get(getAdapterPosition()));
+                    notifyDataSetChanged();
+
                 }
             });
         }

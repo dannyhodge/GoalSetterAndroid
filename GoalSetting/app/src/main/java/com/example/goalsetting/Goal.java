@@ -8,14 +8,16 @@ public class Goal {
    private double endValue;
    private double progress;
    private boolean expanded;
+   private int categoryId;
 
-   public Goal(String title, double startValue, double endValue, double progress, int id) {
+   public Goal(String title, double startValue, double endValue, double progress, int id, int categoryId) {
        this.title = title;
        this.startValue = startValue;
        this.endValue = endValue;
        this.progress = progress;
        this.expanded = false;
        this.id = id;
+       this.categoryId = categoryId;
    }
 
     public String getTitle() {
@@ -60,5 +62,9 @@ public class Goal {
 
     public int getId() {
         return id;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
     }
 }

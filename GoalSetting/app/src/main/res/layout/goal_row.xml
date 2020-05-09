@@ -68,8 +68,6 @@
 
             </LinearLayout>
 
-
-
         </LinearLayout>
 
 
@@ -86,7 +84,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/updateLinearLayout">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textField"
@@ -116,6 +115,23 @@
                     android:text="Update" />
 
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/updateLinearLayout"
+                >
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:id="@+id/removegoalbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Remove Goal"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

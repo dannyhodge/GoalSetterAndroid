@@ -1,0 +1,23 @@
+     val goalsold = listOf(
+            Goal("Run a 20 minute 5K", 25.0, 20.0, 24.0, 0 ),
+            Goal("Do 50 pushups", 30.0, 50.0, 45.0, 1 ),
+            Goal("Squat 100KG", 40.0, 100.0, 60.0, 2 ),
+            Goal("Deadlift 200KG", 70.0, 200.0, 80.0, 3 ),
+            Goal("Bench Press 300KG", 100.0, 300.0, 270.0, 4 )
+        )
+
+        val goals2old = listOf(
+            Goal("Cook 3 new meals", 0.0, 3.0, 1.0, 5 ),
+            Goal("Lose 30 pounds", 0.0, 30.0, 25.0, 6 )
+        )
+
+        val goals3old = listOf(
+            Goal("Read 8 books", 0.0, 8.0, 1.0, 7 )
+        )
+
+        val fitnessCategory: Category = object  : Category( "Fitness", goals, 0){}
+        val dietCategory: Category = object  : Category( "Diet", goals2, 1){}
+        val readingCategory: Category = object  : Category( "Reading", goals3, 2){}
+
+        categoryList = listOf(fitnessCategory, dietCategory, readingCategory)
+        Log.d("log", "added data")

@@ -22,12 +22,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private static final String TAG = "CategoryAdapter";
     private List<Category> categoryList;
     private int currentId = 0;
-    private GoalAdapter adapter;
+    public GoalAdapter adapter;
     private HomeFragment fragment;
+    AppDatabase db;
 
-    public CategoryAdapter(List<Category> categoryList, HomeFragment fragment) {
+    public CategoryAdapter(List<Category> categoryList, HomeFragment fragment, AppDatabase db) {
         this.categoryList = categoryList;
         this.fragment = fragment;
+        this.db = db;
     }
 
     @NonNull
@@ -64,7 +66,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
 
         holder.recyclerViewCategory.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext()));
-        adapter = new GoalAdapter(category.getGoals(), categoryList, fragment);
+        adapter = new GoalAdapter(category.getGoals(), categoryList, fragment, db);
         holder.recyclerViewCategory.setAdapter(adapter);
     }
 

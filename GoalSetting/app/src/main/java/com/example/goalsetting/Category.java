@@ -4,12 +4,14 @@ import java.util.List;
 
 public class Category {
 
+    private int id;
     private String title;
     private List<Goal> goals;
 
-    public Category(String title, List<Goal> goals) {
+    public Category(String title, List<Goal> goals, int id) {
         this.title = title;
         this.goals = goals;
+        this.id = id;
     }
 
     public String getTitle() {
