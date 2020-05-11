@@ -21,6 +21,9 @@ public interface GoalDao {
     @Query("SELECT COUNT(*) FROM goaldb")
     int getCount();
 
+    @Query("UPDATE goaldb SET progress=:progress WHERE id = :id")
+    void updateProgress(double progress, int id);
+
     @Insert
     void insertAll(GoalDB... category);
 

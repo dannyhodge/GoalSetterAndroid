@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goalsetting.ui.home.HomeFragment;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,29 +52,28 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
 
         Goal goal = goalList.get(position);
         holder.titleTextView.setText(goal.getTitle());
-        holder.currentValueTextView.setText("" + (int)goal.getEndValue());
-        holder.progressText.setText("" + (int)goal.getStartValue());
+        holder.currentValueTextView.setText("" + (int) goal.getEndValue());
+        holder.progressText.setText("" + (int) goal.getStartValue());
 
-        if(goal.getStartValue() > goal.getEndValue()) {
+        if (goal.getStartValue() > goal.getEndValue()) {
             holder.progressBar.setMax((int) goal.getStartValue() - (int) goal.getEndValue());
             holder.progressBar.setProgress((int) goal.getStartValue() - (int) goal.getProgress());
-        }
-        else {
+            Log.d("db", "i am changing progress: " + (int)goal.getProgress());
+        } else {
             holder.progressBar.setMax((int) goal.getEndValue() - (int) goal.getStartValue());
             holder.progressBar.setProgress((int) goal.getProgress() - (int) goal.getStartValue());
+            Log.d("db", "i am also changing progress: " + (int)goal.getProgress());
         }
 
         boolean isExpanded = goal.isExpanded();
 
-        if(isExpanded) {
+        if (isExpanded) {
             holder.expandableLayout.setVisibility(View.VISIBLE);
             holder.expandableLayout.setMaxHeight(250);
-        }
-        else {
+        } else {
             holder.expandableLayout.setVisibility(View.INVISIBLE);
             holder.expandableLayout.setMaxHeight(0);
         }
-
     }
 
     @Override
@@ -89,8 +89,8 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
         TextView titleTextView, currentValueTextView, progressText;
         LinearLayout ll;
         ProgressBar progressBar;
-        Button removeButton;
-        String title;
+        Button updateButton;
+        TextInputEditText updateText;
 
         public GoalVH(@NonNull final View itemView) {
             super(itemView);
@@ -101,8 +101,8 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
             progressBar = itemView.findViewById(R.id.progressBar);
             progressText = itemView.findViewById(R.id.textProgress);
-            removeButton = itemView.findViewById(R.id.removegoalbutton);
-
+            updateButton = itemView.findViewById(R.id.updateButton);
+            updateText = itemView.findViewById(R.id.updateText);
 
             ll.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -116,19 +116,45 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
                 }
             });
 
-            removeButton.setOnClickListener(new View.OnClickListener() {
+            updateButton.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onClick(View view) {
-                    Goal goal1 = goalList.get(getAdapterPosition());
-                    GoalDB goalToDelete = db.goalDao().findByName(goal1.getTitle());
-                    db.goalDao().delete(goalToDelete);
-                    goalList.remove(goalList.get(getAdapterPosition()));
-                    notifyDataSetChanged();
+                    double progress = 0.0;
+                    String text = updateText.getText().toString();
+                    if (!text.isEmpty())
+                        try {
+                            progress = Double.parseDouble(text);
+                            // it means it is double
+                        } catch (Exception e1) {
+                            // this means it is not double
+                            e1.printStackTrace();
+                        }
+                    Goal goal = goalList.get(getAdapterPosition());
+                    try {
+                        db.goalDao().updateProgress(progress, goal.getId());
+                        goal.setProgress(progress);
+                        goal.setExpanded(false);
+                        double prog = db.goalDao().findByName(goal.getTitle()).progress;
+                        Log.d("db", "updateval: " + prog);
+                    } catch (Exception e) {
+                        Log.d("db", "error: ", e);
+                    }
 
+                    if (goal.getStartValue() > goal.getEndValue()) {
+                        progressBar.setProgress((int) goal.getStartValue() - (int) progress);
+                        Log.d("db", "set progress " );
+                    } else {
+                        progressBar.setProgress((int) progress - (int) goal.getStartValue());
+                        Log.d("db", "also set progress ");
+                    }
+                    fragment.UpdateGoalList();
+                    notifyDataSetChanged();
+                    hideKeyboard((Activity) view.getContext());
                 }
             });
         }
+
         public void hideKeyboard(Activity activity) {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
             View view = activity.getCurrentFocus();

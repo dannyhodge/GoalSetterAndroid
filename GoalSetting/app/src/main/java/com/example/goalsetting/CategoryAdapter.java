@@ -64,9 +64,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                             .setCancelable(false)
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-
-                                    //match view title to allgoals list?
-                                    GoalAdapter goalAdapter = touchAdapter;  //MAKE ME NOT HARD CODED
+                                    GoalAdapter goalAdapter = touchAdapter;
                                     Goal goal = goalAdapter.goalList.get(viewHolder.getAdapterPosition());
                                     GoalDB goalToDelete = db.goalDao().findByName(goal.getTitle());
                                     db.goalDao().delete(goalToDelete);
