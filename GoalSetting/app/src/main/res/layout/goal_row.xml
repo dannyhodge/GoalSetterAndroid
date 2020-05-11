@@ -35,6 +35,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/removegoalbutton"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:icon="@drawable/ic_delete_black_24dp"
+                    />
+
                 <TextView
                     android:id="@+id/textProgress"
                     android:layout_width="wrap_content"
@@ -42,7 +53,7 @@
                     android:layout_marginRight="7dp"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="6dp"
-                    android:text="Progress"
+                    android:text="0"
                     android:textSize="@dimen/current_value_size" />
 
                 <ProgressBar
@@ -82,10 +93,10 @@
             app:layout_constraintTop_toBottomOf="@id/linearTitle">
 
             <LinearLayout
+                android:id="@+id/updateLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/updateLinearLayout">
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textField"
@@ -115,22 +126,6 @@
                     android:text="Update" />
 
             </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/updateLinearLayout"
-                >
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:id="@+id/removegoalbutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Remove Goal"
-                    android:layout_centerInParent="true"
-                    />
-            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

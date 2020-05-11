@@ -18,6 +18,9 @@ public interface GoalDao {
     @Query("SELECT * FROM goaldb WHERE title LIKE :title LIMIT 1")
     GoalDB findByName(String title);
 
+    @Query("SELECT COUNT(*) FROM goaldb")
+    int getCount();
+
     @Insert
     void insertAll(GoalDB... category);
 

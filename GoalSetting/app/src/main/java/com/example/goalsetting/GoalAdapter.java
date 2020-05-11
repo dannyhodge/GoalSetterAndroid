@@ -29,14 +29,11 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
 
     private static final String TAG = "GoalAdapter";
     List<Goal> goalList;
-    List<Category> categoryList;
-    List<Goal> allGoals = new ArrayList<>();
     private HomeFragment fragment;
     AppDatabase db;
 
     public GoalAdapter(List<Goal> goalList, List<Category> categoryList, HomeFragment fragment, AppDatabase db) {
         this.goalList = goalList;
-        this.categoryList = this.categoryList;
         this.fragment = fragment;
         this.db = db;
     }
@@ -93,6 +90,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
         LinearLayout ll;
         ProgressBar progressBar;
         Button removeButton;
+        String title;
 
         public GoalVH(@NonNull final View itemView) {
             super(itemView);
@@ -104,6 +102,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalVH> {
             progressBar = itemView.findViewById(R.id.progressBar);
             progressText = itemView.findViewById(R.id.textProgress);
             removeButton = itemView.findViewById(R.id.removegoalbutton);
+
 
             ll.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
