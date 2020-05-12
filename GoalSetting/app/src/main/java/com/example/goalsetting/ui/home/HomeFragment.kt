@@ -1,5 +1,6 @@
 package com.example.goalsetting.ui.home
 
+import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.goalsetting.*
+import com.leinardi.android.speeddial.SpeedDialActionItem
+import com.leinardi.android.speeddial.SpeedDialView
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -21,6 +24,7 @@ class HomeFragment : Fragment() {
     var categoryList: MutableList<Category> = mutableListOf()
     lateinit var categoryAdapter: CategoryAdapter
     private lateinit var db: AppDatabase
+    private lateinit var speedDialView: SpeedDialView
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
@@ -33,6 +37,16 @@ class HomeFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerViewVar = view.recyclerView
+
+        speedDialView = view.findViewById<SpeedDialView>(R.id.speedDial)
+
+        speedDialView.addActionItem(
+            SpeedDialActionItem.Builder(R.id.fab_no_label, R.drawable.ic_add_white_24dp)
+                .create())
+
+        speedDialView.addActionItem(
+            SpeedDialActionItem.Builder(R.id.fab_no_label2, R.drawable.ic_add_white_24dp)
+                .create())
 
         initData()
         initCategoryRecyclerView()
