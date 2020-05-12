@@ -2,22 +2,17 @@ package com.example.goalsetting.ui.home
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.room.Room
 import com.example.goalsetting.*
-import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_home.view.*
-
 
 class HomeFragment : Fragment() {
 
@@ -58,7 +53,7 @@ class HomeFragment : Fragment() {
     fun UpdateGoalList() {
         val goals: List<GoalDB> = db!!.goalDao().all
         val categories: List<CategoryDB> = db!!.categoryDao().all
-
+        categoryList = mutableListOf()
         for(category in categories) {
 
             var goalList: MutableList<Goal> = mutableListOf<Goal>()
