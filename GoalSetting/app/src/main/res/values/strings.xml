@@ -10,8 +10,30 @@
     <string name="menu_home">2020 Goals</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="addgoal">Add Goal</string>
 
     <string name="home_second">Home Second</string>
 
     <string name="current_value">Current Value:</string>
+    <string name="title_activity_addnewgoal">addnewgoal</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="action_done">Add Goal</string>
+    <string name="create_goal">Create a new Goal</string>
+
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title">Title</string>
+    <string name="start">Start</string>
+    <string name="goal">Goal</string>
+    <string name="enter_goal_name">Enter Goal Name</string>
+    <string name="enter_goal_value">Enter Goal Value</string>
+    <string name="enter_start_value">Enter Start Value</string>
+    <string name="category">Category</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

@@ -12,6 +12,9 @@ public interface CategoryDao {
     @Query("SELECT * FROM categorydb")
     List<CategoryDB> getAll();
 
+    @Query("SELECT title FROM categorydb")
+    List<String> getAllTitles();
+
     @Query("SELECT * FROM categorydb WHERE id IN (:userIds)")
     List<CategoryDB> loadAllByIds(int[] userIds);
 

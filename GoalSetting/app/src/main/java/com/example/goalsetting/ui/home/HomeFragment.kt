@@ -1,18 +1,23 @@
 package com.example.goalsetting.ui.home
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.goalsetting.*
+import com.example.goalsetting.ui.additem.AddItemFragment
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -42,16 +47,35 @@ class HomeFragment : Fragment() {
 
         speedDialView.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_no_label, R.drawable.ic_add_white_24dp)
+                .setFabBackgroundColor(getResources().getColor(R.color.colorOne))
+                .setLabel("Add Category")
                 .create())
+
 
         speedDialView.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_no_label2, R.drawable.ic_add_white_24dp)
+                .setFabBackgroundColor(getResources().getColor(R.color.colorOne))
+                .setLabel("Add Goal")
                 .create())
+
+        speedDialView.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
+            when (actionItem.id) {
+                R.id.fab_no_label2 -> {
+                    speedDialView.close() // To close the Speed Dial with animation
+                    val intent = Intent(activity, addnewgoal::class.java)
+                    startActivity(intent)
+                    return@OnActionSelectedListener true // false will close it without animation
+                }
+            }
+            true // To keep the Speed Dial open
+        })
 
         initData()
         initCategoryRecyclerView()
         return view
     }
+
+
 
     fun initData() {
         if(activity?.applicationContext != null) {

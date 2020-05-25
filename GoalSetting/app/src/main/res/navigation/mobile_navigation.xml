@@ -11,7 +11,6 @@
         android:name="com.example.goalsetting.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
-
     </fragment>
 
     <fragment
@@ -25,4 +24,5 @@
         android:name="com.example.goalsetting.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
 </navigation>
